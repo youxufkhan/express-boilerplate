@@ -1,0 +1,47 @@
+# .gitignore
+
+# Node.js dependencies
+node_modules/
+
+# Build files (if any)
+build/
+dist/
+
+# Prisma generated files
+/prisma/schema.prisma
+/prisma/client
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+
+# Configuration files (for the 'config' package)
+src/config/development.json
+src/config/production.json
+
+# Editor-specific files (e.g., VSCode, WebStorm)
+.vscode/
+.idea/
+
+# Mac OS system files
+.DS_Store
+
+# Compiled binary extensions (if any)
+*.dll
+*.exe
+
+# Package-lock files
+package-lock.json
+yarn.lock
+
+# Production build files (if any)
+/public/build
+
+# Ignore all .DS_Store files in the project
+**/.DS_Store
+
+# Ignore all .env.local files in the project
+**/.env.local
