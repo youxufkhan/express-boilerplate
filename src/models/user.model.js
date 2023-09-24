@@ -1,3 +1,8 @@
-const { prisma } = require('../config/db')
+const BaseModel = require("./base.model");
 
-module.exports = prisma.user;
+class UserModel extends BaseModel {
+  static table = 'users'; // Define the table property for UserModel
+
+}
+
+module.exports = UserModel;

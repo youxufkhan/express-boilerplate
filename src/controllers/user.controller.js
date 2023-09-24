@@ -1,34 +1,79 @@
 const { User } = require('../models')
 
-async function createUser(req, res) {
+ async function getUsers(req, res) {
   try {
-    const { name, email } = req.body;
-    const user = await User.create({
-      data: {
-        name,
-        email,
-      },
-    });
-    res.status(201).json(user);
+    const users = await User.getAll();
+    res.status(200).json(users);
   } catch (error) {
-    console.error('Error creating user:', error);
-    res.status(500).json({ error: 'Failed to create user' });
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 }
 
-async function getUsers(req, res) {
+ async function getUser(req, res) {
+  const { id } = req.params;
   try {
-    const users = await User.findMany();
-    res.json(users);
+    const user = await User.getById(id);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
   } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).json({ error: 'Failed to fetch users' });
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 }
+
+ async function createUser(req, res) {
+  const user = req.body;
+  try {
+    const createdUser = await User.create(user);
+    res.status(201).json(createdUser[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+ async function updateUser(req, res) {
+  const { id } = req.params;
+  const updatedUser = req.body;
+  try {
+    const user = await User.update(id, updatedUser);
+    if (user.length > 0) {
+      res.status(200).json(user[0]);
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+ async function deleteUser(req, res) {
+  const { id } = req.params;
+  try {
+    const deletedCount = await User.delete(id);
+    if (deletedCount > 0) {
+      res.status(204).end();
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
 
 
 module.exports = {
   createUser,
   getUsers,
+  getUser,
+  deleteUser,
+  updateUser,
   // Export other controller functions here...
 };

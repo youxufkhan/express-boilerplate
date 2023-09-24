@@ -5,7 +5,7 @@ const cors = require('cors');
 // Import routes, controllers, config etc.
 const config = require('./src/config')
 const routes = require('./src/routes')
-const { connect, disconnect, prisma } = require('./src/config/db'); // Adjust the path as needed
+const db = require('./src/config/db'); // Adjust the path as needed
 const errorHandlerUtil = require('./src/utils/errorHandler.util');
 
 // Load configuration settings
@@ -26,7 +26,7 @@ app.use('/api/user', routes.userRoute);
 // Start the server
 async function startServer() {
   try {
-    await connect(); // Establish the database connection
+    // await connect(); // Establish the database connection
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
     });

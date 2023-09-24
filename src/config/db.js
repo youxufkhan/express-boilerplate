@@ -1,38 +1,21 @@
-const { PrismaClient } = require('@prisma/client');
+const knex = require('knex');
+const knexfile = require('../../knexfile');
 
-const prisma = new PrismaClient();
+const environment = process.env.NODE_ENV || 'development';
+const configuration = knexfile[environment];
 
-async function connect() {
-  try {
-    await prisma.$connect();
-    console.log("✔ DATABASE CONNECTED")
-    console.log('Database connection established.');
-  } catch (error) {
-    console.log("❌ DATABASE NOT CONNECTED")
-    console.error('Error connecting to the database:', error.message);
-    process.exit(1);
-  }
-}
+const db = knex(configuration);
 
-async function disconnect() {
-  await prisma.$disconnect();
-  console.log('Database connection closed.');
-}
+db.client.pool.on('afterCreate', (connection) => {
+  console.log('Knex has connected to the database.');
+});
 
-process.on('SIGINT', async () => {
-    try {
-      await disconnect(); // Disconnect from the database
-      console.log('Server shutting down. Database connection closed.');
-    } catch (error) {
-      console.error('Error while shutting down the server:', error);
-    } finally {
-      process.exit(0); // Exit the application
-    }
-  });
+db.client.pool.on('afterDestroy', (connection) => {
+  console.log('Knex has disconnected from the database.');
+});
 
-module.exports = {
-  prisma,
-  connect,
-  disconnect,
-};
+db.client.pool.on('error', (error) => {
+  console.error('Knex pool error:', error);
+});
 
+module.exports = db;
