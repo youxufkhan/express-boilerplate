@@ -1,15 +1,21 @@
-const { PrismaClient } = require('@prisma/client'); // Import PrismaClient
-const config = require('config');
-const dbUrl = config.get('DATABASE_URL');
+const knex = require('knex');
+const knexfile = require('../../knexfile');
 
-const prisma = new PrismaClient({
-    datasources: {
-        db: {
-            url: dbUrl,
-        },
-    },
+const environment = process.env.NODE_ENV || 'development';
+const configuration = knexfile[environment];
+
+const db = knex(configuration);
+
+db.client.pool.on('afterCreate', (connection) => {
+  console.log('Knex has connected to the database.');
 });
 
-process.on('SIGTERM', () => {
-    prisma.$disconnect();
+db.client.pool.on('afterDestroy', (connection) => {
+  console.log('Knex has disconnected from the database.');
 });
+
+db.client.pool.on('error', (error) => {
+  console.error('Knex pool error:', error);
+});
+
+module.exports = db;
