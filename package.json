@@ -2,20 +2,38 @@
   "name": "express-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.3.1",
+    "@elastic/ecs-pino-format": "^1.5.0",
     "body-parser": "^1.20.2",
     "config": "^3.3.9",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "elastic-apm-node": "^4.3.0",
+    "express": "^4.18.2",
+    "knex": "^2.5.1",
+    "pg": "^8.11.3",
+    "pino": "^8.17.2"
   },
   "devDependencies": {
-    "prisma": "^5.3.1"
+    "eslint": "^8.50.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
   }
 }

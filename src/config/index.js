@@ -1,3 +1,5 @@
-process.env["NODE_CONFIG_DIR"] = __dirname;
-const config = require('config');
+/* eslint-disable no-undef */
+process.env.NODE_CONFIG_DIR = __dirname;
+const config = require("config");
+
 module.exports = config;
