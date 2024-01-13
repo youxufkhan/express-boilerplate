@@ -1,24 +1,7 @@
-const { apm } = require('./src/adapters');
-const express = require("express");
-const { logger } = require("./src/helpers")
-
-if(apm.isStarted()){
-  console.log('APM is started');
-}else{
-  console.log('APM has not started');
-}
-
-const bodyParser = require("body-parser");
-const cors = require("cors");
-
-// Import routes, controllers, config etc.
-const config = require("./src/config");
-const routes = require("./src/routes");
-require("./src/adapters").db; // Adjust the path as needed
-const errorHandlerUtil = require("./src/utils/errorHandler.util");
-
-// Load configuration settings
-const port = config.get("server.port");
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const config = require('./src/config')
 
 // Create an Express application
 const app = express();
@@ -26,28 +9,15 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-app.use(apm.middleware.connect());
+
+// Load configuration settings
+const dbUrl = config.get('DATABASE_URL');
+const port = config.get('PORT');
 
 // Define your routes and controllers
-app.use("/api/test", routes.testRoute);
-app.use("/api/user", routes.userRoute);
-
+// app.use('/api/users', require('./src/routes/users'));
 
 // Start the server
-async function startServer() {
-  try {
-    // await connect(); // Establish the database connection
-    app.listen(port, () => {
-      logger.info(`Server is running on port ${port}`);
-    });
-  } catch (error) {
-    logger.error("Error starting the server:", error);
-    // eslint-disable-next-line no-undef
-    process.exit(1);
-  }
-}
-
-// Error middleware & exception handler
-errorHandlerUtil(app);
-
-startServer();
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
