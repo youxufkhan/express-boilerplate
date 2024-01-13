@@ -1,5 +1,7 @@
+const { logger } = require("../helpers");
+
 const testFunc = async (req, res) => {
-  console.log("TestFunc");
+  logger.log(" Inside TestFunc");
   res.send({ code: 200, message: "success", status: true });
 };
 
