@@ -1,4 +1,4 @@
-const db = require('../config/db')
+const db = require('../adapters/db')
 
 class BaseModel {
     static table ; // Define the table property for UserModel
