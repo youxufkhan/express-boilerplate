@@ -1,3 +1,4 @@
+if(!process.NODE_ENV) process.env.NODE_ENV = 'development';
 const { apm } = require('./src/adapters');
 const express = require("express");
 const { logger } = require("./src/helpers")
@@ -46,6 +47,7 @@ async function startServer() {
     process.exit(1);
   }
 }
+
 
 // Error middleware & exception handler
 errorHandlerUtil(app);
