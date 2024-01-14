@@ -1,7 +1,7 @@
 const AWS = require("aws-sdk");
-const s3 = new AWS.S3()
-const path = require('path')
-const fs = require('fs')
+const s3 = new AWS.S3();
+const path = require('path');
+const fs = require('fs');
 
 // eslint-disable-next-line no-unexpected-multiline
 (async () => {
