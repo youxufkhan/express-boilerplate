@@ -1,0 +1,16 @@
+{
+    "server": {
+      "port": 3000,
+      "secret_key": "your_secret_key_here"
+    },
+    "db": {
+      "database_url": "test"
+    },
+    "apm": {
+      "serverUrl": "your_server_url_here",
+      "serviceName": "your_service_name_here",
+      "secretToken": "your_secret_token_here",
+      "environment": "your_environment_here",
+      "verifyServerCert": false
+    }
+  }

@@ -20,8 +20,6 @@ logs/
 
 # Configuration files (for the 'config' package)
 src/config/development.json
-src/config/staging.json
-src/config/production.json
 
 # Editor-specific files (e.g., VSCode, WebStorm)
 .vscode/
