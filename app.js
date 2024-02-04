@@ -7,6 +7,8 @@ if (config.APM_ENABLED) {
   } else {
     console.log('APM has not started');
   }
+}else{
+  console.log('APM is not enabled');
 }
 const express = require("express");
 const { logger } = require("./src/helpers")
