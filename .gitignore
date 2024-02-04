@@ -44,3 +44,7 @@ yarn.lock
 
 # Ignore all .env.local files in the project
 **/.env.local
+.env*
+.flaskenv*
+!.env.project
+!.env.vault

@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
-process.env.NODE_CONFIG_DIR = __dirname;
-const config = require("config");
+const config = {}
+require('dotenv').config({ processEnv: config })
+
 
 module.exports = config;
