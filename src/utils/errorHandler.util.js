@@ -5,7 +5,7 @@ module.exports = (app) => {
   // eslint-disable-next-line no-unused-vars
   app.use((err, _req, res, _next) => {
     logger.error("Error:", err);
-    apm.captureError(err);
+    apm?.captureError(err);
 
     // Define a custom error response object
     const errorResponse = {
@@ -21,7 +21,7 @@ module.exports = (app) => {
   // eslint-disable-next-line no-undef
   process.on("uncaughtException", (error) => {
     logger.error("Uncaught Exception:", error);
-    apm.captureError(error);
+    apm?.captureError(error);
     // Perform any necessary cleanup or logging here
 
     // Terminate the application with a non-zero exit code
@@ -29,7 +29,8 @@ module.exports = (app) => {
     process.exit(1);
   });
 
-  apm.handleUncaughtExceptions((error) => {
+  apm?.handleUncaughtExceptions((error) => {
+
     logger.error("Uncaught Exception:", error);
     apm.captureError(error);
     // Perform any necessary cleanup or logging here

@@ -7,7 +7,7 @@ const config = require("./src/config");
 module.exports = {
   development: {
     client: "pg",
-    connection: config.get("db.database_url"),
+    connection: config.DATABASE_URL,
     pool: {
       min: 2,
       max: 10,
