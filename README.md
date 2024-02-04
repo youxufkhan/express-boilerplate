@@ -16,7 +16,7 @@ The development server will listen on port 3000. You can access the project by v
 * Husky (git hooks)
 * Pino (logging)
 * APM (application performance monitoring)
-* config (configuration management)
+* dotenv (configuration management)
 
 ## To be implemented
 
