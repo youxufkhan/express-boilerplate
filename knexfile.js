@@ -6,8 +6,14 @@ const config = require("./src/config");
 
 module.exports = {
   development: {
-    client: "pg",
-    connection: config.DATABASE_URL,
+    client: "mysql2",
+    connection:
+    {
+      host: config.DB_HOST,
+      user: config.DB_USER,
+      password: config.DB_PASSWORD,
+      database: config.DB_NAME,
+    },
     pool: {
       min: 2,
       max: 10,
@@ -15,17 +21,6 @@ module.exports = {
     migrations: {
       tableName: "knex_migrations",
     },
-  },
-  production: {
-    client: "pg",
-    connection: config.DATABASE_URL,
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: "knex_migrations",
-    },
-  },
+  }
 
 };

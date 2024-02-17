@@ -1,21 +1,5 @@
 const config = require("./src/config");
-if (config.APM_ENABLED) {
-  console.log('APM is enabled');
-  const { apm } = require('./src/adapters');
-  if (apm.isStarted()) {
-    console.log('APM is started');
-  } else {
-    console.log('APM has not started');
-  }
-}else{
-  console.log('APM is not enabled');
-}
 const express = require("express");
-const { logger } = require("./src/helpers")
-
-
-
-const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // Import routes, controllers etc.
@@ -29,11 +13,12 @@ const port = config.PORT
 // Create an Express application
 const app = express();
 
-// Middleware
-app.use(bodyParser.json());
+// Middlewares
+// Middleware to parse JSON bodies
+app.use(express.json());
+// Middleware to parse urlencoded bodies
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-// eslint-disable-next-line no-undef
-if (config.APM_ENABLED) app.use(apm?.middleware.connect());
 
 // Define your routes and controllers
 app.use("/api/test", routes.testRoute);
@@ -45,11 +30,10 @@ async function startServer() {
   try {
     // await connect(); // Establish the database connection
     app.listen(port, () => {
-      logger.info(`Server is running on port ${port}`);
+      console.info(`Server is running on port ${port}`);
     });
   } catch (error) {
-    logger.error("Error starting the server:", error);
-    // eslint-disable-next-line no-undef
+    console.error("Error starting the server:", error);
     process.exit(1);
   }
 }
