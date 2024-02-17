@@ -1,4 +1,5 @@
 
+| This branch contains bloat-free express.js boilerplate as compared to the main branch
 # Express Boilerplate Project
 
 This is a boilerplate project for creating Express applications. It includes all the necessary files and dependencies to get you started quickly.
@@ -9,32 +10,16 @@ The development server will listen on port 3000. You can access the project by v
 ## Technologies used
 
 * Node.js (runtime environment)
-* express.js (franework)
-* PostgreSQL (database)
+* express.js (framework)
+* MySQL (database)
 * Knex (query builder)
-* ESLint (linter)
-* Husky (git hooks)
-* Pino (logging)
-* APM (application performance monitoring)
 * dotenv (configuration management)
-
-## To be implemented
-
-* authentication
-* validation
-* testing
-* deployment
-* dependency injection
-* redis
-* swagger
-* docker
 
 ## Project Structure
 
 The project is organized into the following directories:
 
 * `migrations`: This directory contains the database migrations for the project
-* `.husky`: This directory contains the hooks for the project
 * `src`: This directory contains the source code for the project.
     * `adapters`: This directory contains adapters for the project.
     * `config`: This directory contains configuration files for the project.
@@ -47,8 +32,6 @@ The project is organized into the following directories:
 * `knexfile.js`: This file contains the configuration for the database
 * `package.json`: This file contains the project's dependencies.
 * `README.md`: This file contains information about the project.
-* `.eslintrc.js`: This file contains the configuration for the ESLint linter
-* `.eslintignore`: This file contains a list of files and directories that should be ignored by ESLint.
 * `.gitignore`: This file contains a list of files and directories that should be ignored by Git.
 
 
